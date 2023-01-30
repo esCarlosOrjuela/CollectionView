@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PracticaCollectionView.MVVM.Views.LayoutPage2"
+             Title="LayoutPage2">
+
+    <ContentPage.Resources>
+        <ContentView x:Key="NoResultsView">
+            <VerticalStackLayout VerticalOptions="Center">
+                <Image
+                    HeightRequest="150"
+                    Source="alcohol.png"
+                    VerticalOptions="Center"/>
+                <Label
+                     Text="No Results!"
+                     TextColor="White"
+                     FontAttributes="Bold"
+                     HorizontalOptions="Center"
+                     VerticalOptions="CenterAndExpand"
+                       />
+            </VerticalStackLayout>
+        </ContentView>
+        <ContentView x:Key="ConnectivityIssue">
+            <VerticalStackLayout VerticalOptions="Center">
+                <Image
+                    HeightRequest="150"
+                    Source="banana.png"
+                    VerticalOptions="Center"/>
+                <Label
+                     TextColor="White"
+                     FontAttributes="Bold"
+                     HorizontalOptions="Center"
+                     VerticalOptions="CenterAndExpand"
+                     Text="Check you internet connections!"
+                       />
+            </VerticalStackLayout>
+        </ContentView>
+    </ContentPage.Resources>
+
+
+    <CollectionView
+        x:Name="collectionProduct"
+        SelectionMode="Single"
+        EmptyView="Not Data Found!"
+        SelectedItem="{Binding SelectedProduct}"
+        ItemsSource="{Binding BindingProductModels}"
+        SelectionChangedCommand="{Binding ProductChangedCommand}"
+        >
+        <CollectionView.Header>
+            <HorizontalStackLayout BackgroundColor="Purple" Spacing="10">
+                <Button
+                    Text="Delete Products"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    VerticalOptions="CenterAndExpand"
+                    Command="{Binding DeleteDataCommand}"
+                    />
+                <Label TextColor="White" Text="Dynamic ContentView EmptyView:"  VerticalOptions="CenterAndExpand" />
+                <Switch Toggled="Switch_Toggled" VerticalOptions="CenterAndExpand"/>
+            </HorizontalStackLayout>
+        </CollectionView.Header>
+        <CollectionView.Footer>
+            <StackLayout Margin="10" BackgroundColor="Purple">
+                <Label Text="End of List"
+                       TextColor="White"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       VerticalOptions="CenterAndExpand"
+                       />
+            </StackLayout>
+        </CollectionView.Footer>
+        <CollectionView.ItemsLayout>
+            <LinearItemsLayout Orientation="Vertical"  />
+        </CollectionView.ItemsLayout>
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <Frame
+                    Margin="15"
+                    WidthRequest="200"
+                    HeightRequest="250">
+                    <VerticalStackLayout VerticalOptions="CenterAndExpand">
+                        <Image
+                            HeightRequest="200"
+                            Source="{Binding Image}"
+                            VerticalOptions="Center"/>
+                        <Label
+                            Text="{Binding Name}"
+                            HorizontalTextAlignment="Center" />
+                    </VerticalStackLayout>
+                </Frame>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentPage>

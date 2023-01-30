@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xaml-comp compile="true" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:ViewModels="clr-namespace:PracticaCollectionView.MVVM.ViewModels">
+    <DataTemplate x:Key="ProductCollection">
+        <SwipeView>
+            <SwipeView.LeftItems>
+                <SwipeItems>
+                    <SwipeItem
+                        BackgroundColor="DarkRed"
+                        IconImageSource="dotnet_bot"
+                        CommandParameter="{Binding .}"
+                        Command="{Binding Source={RelativeSource AncestorType={x:Type ViewModels:DataViewModels} }, Path=DeleteCommand}"
+                        />
+                </SwipeItems>
+            </SwipeView.LeftItems>
+            <Grid
+                Margin="15,10,15,0"
+                RowDefinitions="*,*"
+                ColumnDefinitions=".1*, .2*, .7*">
+                <Frame
+                    Grid.Column="1"
+                    Grid.RowSpan="2"
+                    Grid.ColumnSpan="2"
+                    BorderColor="White" >
+                    <Frame.Background>
+                        <LinearGradientBrush EndPoint="1,0">
+                            <GradientStop Offset="0" Color="#F8F9FA" />
+                            <GradientStop Offset="1" Color="#DEE2E6" />
+                        </LinearGradientBrush>
+                    </Frame.Background>
+                </Frame>
+                <Image
+                    Grid.RowSpan="2"
+                    Grid.ColumnSpan="2"
+                    HeightRequest="80"
+                    Source="{Binding Image}"
+                    />
+                <Label
+                    Grid.Column="2"
+                    FontSize="Large"
+                    Text="{Binding Name}"
+                    VerticalOptions="Center"
+                    />
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    FontSize="Large"
+                    VerticalOptions="Center"
+                    Text="{Binding Price, StringFormat='{0:C}'}"
+                    />
+            </Grid>
+        </SwipeView>
+
+    </DataTemplate>
+
+    <DataTemplate x:Key="OfferStyle">
+        <Grid
+            Margin="15,10,15,0"
+            RowDefinitions="*,*"
+            ColumnDefinitions=".3*,.7*">
+            <Frame
+                Grid.RowSpan="2"
+                Grid.ColumnSpan="2"
+                BorderColor="White" >
+                <Frame.Background>
+                    <LinearGradientBrush EndPoint="1,0">
+                        <GradientStop Offset="0" Color="#FFBF47" />
+                        <GradientStop Offset="1" Color="#EEB54C" />
+                    </LinearGradientBrush>
+                </Frame.Background>
+            </Frame>
+            <Image
+                Grid.RowSpan="2"
+                HeightRequest="80"
+                Source="{Binding Image}"
+                />
+            <Label
+                Grid.Column="2"
+                FontSize="Title"
+                TextColor="White"
+                FontAttributes="Bold"
+                VerticalOptions="Center"
+                Text="{Binding Name, StringFormat='Offer:{0}'}"
+                />
+            <Label
+                Grid.Row="1"
+                Grid.Column="2"
+                FontSize="Title"
+                TextColor="White"
+                FontAttributes="Bold"
+                VerticalOptions="Center">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{Binding OfferPrice}"/>
+                        <Span Text=" ...Antes: " FontSize="Small"/>
+                        <Span Text="{Binding Price, StringFormat=':{0}'}" TextColor="DarkRed" TextDecorations="Strikethrough"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+        </Grid>
+    </DataTemplate>
+</ResourceDictionary>
